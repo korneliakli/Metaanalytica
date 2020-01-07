@@ -1,7 +1,47 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
 #include "matrix.h"
 
+double sse(int n, double y[n][1], double y_dash[n][1])
+{
+    double res = 0;
+    
+    for(int i = 0; i < n; i++)
+    {
+        res += pow((y[i][1] - y_dash[i][1]), 2);
+    }
+    
+    return res;
+}
 
-void linearRegression(int n, int m, double x[n][m], double y[n][1], double betas[m][1], double stdErrors[m][1], double p_vals[m][1])
+void standardError(int n, int m, double y[n][1], double x[n][m], double x_inv[m][m], double betas[m][1], double stdErrors[m][1])
+{
+    double y_dash[n][1];
+    
+    multiplyMatrices(n, m, m, 1, x, betas, y_dash);
+    double sumSqErr = sse(n, y, y_dash);
+    
+    double mse = sumSqErr/(n - m - 1);
+    
+    for(int i = 0; i < m; i++)
+    {
+        for(int j = 0; j < m; j++)
+        {
+            x_inv[i][j] = x_inv[i][j]*mse;
+        }
+    }
+    
+    
+    diagonal(m, x_inv, stdErrors);
+    
+    for(int i = 0; i < m; i++)
+    {
+        stdErrors[i][1] = sqrt(stdErrors[i][1]);
+    }
+}
+
+void linearRegression(int n, int m, double x[n][m], double y[n][1], double betas[m][1], double stdErrors[m][1])
 {
     double transp_x[m][n];
     
@@ -13,7 +53,7 @@ void linearRegression(int n, int m, double x[n][m], double y[n][1], double betas
     
     
     double x_inv[m][m];
-    double P[m];
+    int P[m];
     
     LUPDecompose(m, x_mult, P);
     LUPInvert(m, x_mult, P, x_inv);
@@ -23,4 +63,6 @@ void linearRegression(int n, int m, double x[n][m], double y[n][1], double betas
     
     multiplyMatrices(m, m, m, n, x_inv, transp_x, x_inv_transp);
     multiplyMatrices(m, n, n, 1, x_inv_transp, y, betas);
+    
+    standardError(n, m, y, x, x_inv, betas, stdErrors);
 }
