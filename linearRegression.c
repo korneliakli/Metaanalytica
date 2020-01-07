@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<math.h>
 #include<stdlib.h>
-#include "matrix.h"
+#include"matrix.h"
+#include"betagamma.h"
 
 double sse(int n, double y[n][1], double y_dash[n][1])
 {
