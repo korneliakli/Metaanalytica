@@ -1,3 +1,4 @@
+#include<stdio.h>
 #include<math.h>
 #include<stdlib.h>
 
@@ -150,14 +151,10 @@ void multiplyMatrices(int n1, int m1, int n2, int m2, double mat1[n1][m1], doubl
 
 }
 
-double sse(int n, y[n][1], y_dash[n][1])
+double diagonal(int n, double matrix[n][n], double diag[n][1])
 {
-    double res = 0;
-    
     for(int i = 0; i < n; i++)
     {
-        res += pow((y[i][1] - y_dash[i][1]), 2);
+        diag[i][0] = matrix[i][i];
     }
-    
-    return res;
 }
