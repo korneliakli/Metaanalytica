@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<math.h>
 #include<stdlib.h>
+#include"matrix.h"
 
 void display(int row, int col, double mat[row][col]) 
 { 
