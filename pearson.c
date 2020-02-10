@@ -25,7 +25,7 @@ double pearson(double x[], double y[], int size, double mean_x, double mean_y) /
 }
 
 
-double calc_pval(double r, double df) // r - wartość obliczona z funkcji pearson(), df - stopnie swobody: parametr size z funkcji pearson - 2
+double calc_pval_pearson(double r, double df) // r - wartość obliczona z funkcji pearson(), df - stopnie swobody: parametr size z funkcji pearson - 2
 {
 	double t = r * sqrt(6 / (1 - pow(r, 2)));
 	double x = df / (pow(t, 2) + df);
