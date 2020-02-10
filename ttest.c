@@ -1,21 +1,22 @@
 #include <math.h>
 #include "betagamma.h"
+#include "ttest.h"
 
 /*
-W t-teúcie chodzi o porÛwnanie dwÛch úrednich.
-Zaimplementowa≥am dwa rodzaje - dla jednej prÛby i dla prÛb niezaleønych, jest jeszcze dla prÛb zaleønych, zrobiÍ jπ jak zaakceptujesz te.
-Skoro masz juø funkcje liczπce úredniπ i sd to wrzuci≥am to od razu do parametrÛw.
-Wyniki pezentuje siÍ:  úrednia1 +/- sd1 | úrednia2 +/- sd2 (tudzieø dla populacji w pojedynczym) | p-value
+W t-te≈õcie chodzi o por√≥wnanie dw√≥ch ≈õrednich.
+Zaimplementowa≈Çam dwa rodzaje - dla jednej pr√≥by i dla pr√≥b niezale≈ºnych, jest jeszcze dla pr√≥b zale≈ºnych, zrobiƒô jƒÖ jak zaakceptujesz te.
+Skoro masz ju≈º funkcje liczƒÖce ≈õredniƒÖ i sd to wrzuci≈Çam to od razu do parametr√≥w.
+Wyniki pezentuje siƒô:  ≈õrednia1 +/- sd1 | ≈õrednia2 +/- sd2 (tudzie≈º dla populacji w pojedynczym) | p-value
 */
 
-//t-test dla pojedynczej prÛby
-double single_ttest(double mean, double sd, double mean_pop) //mean - úrednia z analizowanych danych, sd - odchylenie standardowe, mean_pop - úrednia z porÛwnywanej populacji (podaje uøytkownik)
+//t-test dla pojedynczej pr√≥by
+double single_ttest(double mean, double sd, double mean_pop) //mean - ≈õrednia z analizowanych danych, sd - odchylenie standardowe, mean_pop - ≈õrednia z por√≥wnywanej populacji (podaje u≈ºytkownik)
 {
 	return (mean - mean_pop) / sd;
 }
 
-//t-test dla prÛb niezaleønych
-double indep_ttest(double mean1, double mean2, double sd1, double sd2, int n1, int n2) //mean1, mean2 - úrednie z porÛwnywanych grup, sd1, sd2 - odchylenia standardowe, n1, n2 - liczebnoúci grup
+//t-test dla pr√≥b niezale≈ºnych
+double indep_ttest(double mean1, double mean2, double sd1, double sd2, int n1, int n2) //mean1, mean2 - ≈õrednie z por√≥wnywanych grup, sd1, sd2 - odchylenia standardowe, n1, n2 - liczebno≈õci grup
 {
 	double sd_temp1 = (n1 - 1) * pow(sd1, 2);
 	double sd_temp2 = (n2 - 1) * pow(sd2, 2);
@@ -27,7 +28,7 @@ double indep_ttest(double mean1, double mean2, double sd1, double sd2, int n1, i
 }
 
 //obliczanie p-value
-double calc_pval(double t, double df) // t - wartoúÊ obliczona z jednej z poprzednich funkcji, df - stopnie swobody: dla single_ttest = n - 1, dla indep_ttest = n1 + n2 - 2
+double calc_pval(double t, double df) // t - warto≈õƒá obliczona z jednej z poprzednich funkcji, df - stopnie swobody: dla single_ttest = n - 1, dla indep_ttest = n1 + n2 - 2
 {
 	x = df / (pow(t, 2) + df);
 
