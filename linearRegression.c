@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include"matrix.h"
 #include"betagamma.h"
+#include "linearRegression.h"
 
 double sse(int n, double y[n][1], double y_dash[n][1])
 {
