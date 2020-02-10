@@ -1,4 +1,5 @@
 #include "betagamma.h"
+#include "pearson.h"
 #include <math.h>
 
 /*
