@@ -68,7 +68,7 @@ void linearRegression(int n, int m, double x[n][m], double y[n][1], double betas
     standardError(n, m, y, x, x_inv, betas, stdErrors);
 }
 
-double calc_pval_linreg(int m, double stdErrors[m][1], double betas[m][1], double df, double pvals[m][1]) // t - wartość obliczona z jednej z poprzednich funkcji, df - stopnie swobody: dla single_ttest = n - 1, dla indep_ttest = n1 + n2 - 2
+double calc_pval_linreg(int m, double stdErrors[m][1], double betas[m][1], double df, double pvals[m][1]) 
 {
 	double x[m][1];
     double t[m][1];
